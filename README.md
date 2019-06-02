@@ -1,0 +1,2 @@
+# Core
+SimplyAnIcon.Core
