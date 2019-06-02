@@ -27,12 +27,20 @@
                     <ResourceDictionary>
                         <DataTemplate  DataType="{x:Type vm:SeparatorMenuItemViewModel}">
                             <Grid>
-                                <Rectangle Fill="DarkGray" Stroke="DarkGray" Height="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="-20,0,-50,0" />
+                                <Rectangle Fill="DarkGray" Stroke="DarkGray" Height="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="-20,0,-15,0" />
                             </Grid>
                         </DataTemplate>
                         <DataTemplate  DataType="{x:Type vm:MenuItemViewModel}">
                             <TextBlock Text="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
                         </DataTemplate>
+                        <Style TargetType="{x:Type ContextMenu}">
+                            <Style.Resources>
+                                <ResourceDictionary Source="/PresentationFramework.Royale;component/themes/Royale.NormalColor.xaml" />
+                            </Style.Resources>
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Style>
                     </ResourceDictionary>
                 </ContextMenu.Resources>
             </ContextMenu>
