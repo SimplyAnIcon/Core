@@ -1,4 +1,5 @@
-﻿<Window x:Class="SimplyAnIcon.Core.Windows.ConfigWindow"
+﻿<!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+<Window x:Class="SimplyAnIcon.Core.Windows.ConfigWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"

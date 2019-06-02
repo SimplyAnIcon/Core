@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using SimplyAnIcon.Common.Helpers.Interfaces;
 using SimplyAnIcon.Core.Helpers.Interfaces;
 using SimplyAnIcon.Core.Models;
 using SimplyAnIcon.Core.Settings.Interface;

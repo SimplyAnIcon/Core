@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Com.Ericmas001.DependencyInjection.Resolvers.Interfaces;
 using Com.Ericmas001.Mvvm.Collections;
 using SimplyAnIcon.Core.Models;
@@ -37,12 +38,13 @@ namespace SimplyAnIcon.Core.ViewModels.ConfigurationSections
         /// </summary>
         public void OnInit(IEnumerable<PluginInfo> catalog)
         {
+            var currentCatalog = catalog.ToArray();
             var genPlugin = _resolverService.Resolve<GeneralPluginsConfigurationSectionViewModel>();
-            genPlugin.OnInit(catalog);
+            genPlugin.OnInit(currentCatalog);
             _sections.Add(genPlugin);
 
             var plugins = _resolverService.Resolve<SpecificPluginsConfigurationSectionViewModel>();
-            plugins.OnInit(catalog);
+            plugins.OnInit(currentCatalog);
             _sections.Add(plugins);
         }
     }

@@ -84,7 +84,7 @@ namespace SimplyAnIcon.Core.Services
             var registrantBuilder = registrantFinderBuilder ?? new RegistrantFinderBuilder();
 
             var forced = forcedPlugins?.ToArray() ?? new string[0];
-            var catalog = currentCatalog ?? new PluginInfo[0];
+            var catalog = currentCatalog?.ToArray() ?? new PluginInfo[0];
             var dirs = pluginPaths.Select(x => new DirectoryInfo(x)).Where(x => x.Exists);
             var excludedPrefix = new[]
             {
@@ -127,8 +127,8 @@ namespace SimplyAnIcon.Core.Services
                 .Select(x => new PluginInfo
                 {
                     Plugin = catalog.FirstOrDefault(o => o.Plugin.Name == x.Plugin.Name)?.Plugin ?? x.Plugin,
-                    IsActivated = forced.Contains(x.Setting.Name) || (x.Setting?.IsActive ?? false),
-                    IsNew = !catalog.Any(o => o.Plugin.Name == x.Plugin.Name)
+                    IsActivated = forced.Contains(x.Setting?.Name) || (x.Setting?.IsActive ?? false),
+                    IsNew = catalog.All(o => o.Plugin.Name != x.Plugin.Name)
                 })
                 .ToArray();
 
@@ -140,7 +140,7 @@ namespace SimplyAnIcon.Core.Services
                 }
                 catch
                 {
-                    newCatalog = newCatalog.Except(new []{plugin}).ToArray();
+                    newCatalog = newCatalog.Except(new[] { plugin }).ToArray();
                 }
             }
 

@@ -36,7 +36,10 @@ namespace SimplyAnIcon.Core.ViewModels.ConfigurationSections.Plugins.Config
                 {
                     Plugin.SetConfigurationValue(x.Setting.Key, x.ResultValue);
                 }
-                catch { }
+                catch
+                {
+                    // Do nothing !
+                }
             });
         }
 
@@ -73,6 +76,7 @@ namespace SimplyAnIcon.Core.ViewModels.ConfigurationSections.Plugins.Config
                             Items.Add(itVm);
                             break;
                         }
+
                         case StringListSettingValue listIt:
                         {
                             var itVm = _resolverService.Resolve<StringListConfigurationItemViewModel>();
@@ -80,6 +84,7 @@ namespace SimplyAnIcon.Core.ViewModels.ConfigurationSections.Plugins.Config
                             Items.Add(itVm);
                             break;
                         }
+
                         case StringSettingValue strIt:
                         {
                             var itVm = _resolverService.Resolve<StringConfigurationItemViewModel>();
@@ -87,6 +92,7 @@ namespace SimplyAnIcon.Core.ViewModels.ConfigurationSections.Plugins.Config
                             Items.Add(itVm);
                             break;
                         }
+
                         case IntSettingValue intIt:
                         {
                             var itVm = _resolverService.Resolve<IntConfigurationItemViewModel>();
@@ -96,7 +102,10 @@ namespace SimplyAnIcon.Core.ViewModels.ConfigurationSections.Plugins.Config
                         }
                     }
                 }
-                catch { }
+                catch
+                {
+                    // Do nothing
+                }
             }
         }
     }
