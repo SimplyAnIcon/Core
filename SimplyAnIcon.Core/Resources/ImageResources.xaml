@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="SimplyAnIcon.Core.Resources.ImageResources">
+    <BitmapImage x:Key="SimplyIconConfig" UriSource="/SimplyAnIcon.Core;component/Resources/config.png" />
+    <BitmapImage x:Key="SimplyIconExit" UriSource="/SimplyAnIcon.Core;component/Resources/exit.png" />
+    <BitmapImage x:Key="SimplyIconRestart" UriSource="/SimplyAnIcon.Core;component/Resources/restart.png" />
+    <BitmapImage x:Key="SimplyIconUpdate" UriSource="/SimplyAnIcon.Core;component/Resources/update.png" />
+</ResourceDictionary>

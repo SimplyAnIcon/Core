@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:tb="http://www.hardcodet.net/taskbar"
+                    xmlns:vm="clr-namespace:SimplyAnIcon.Plugins.Wpf.V1.MenuItemViewModels;assembly=SimplyAnIcon.Plugins.Wpf"
+                    xmlns:resources="clr-namespace:SimplyAnIcon.Plugins.Wpf.Resources;assembly=SimplyAnIcon.Plugins.Wpf"
+                    xmlns:styleSelectors="clr-namespace:SimplyAnIcon.Core.StyleSelectors"
+                    x:Class="SimplyAnIcon.Core.Resources.NotifyIconResources">
+
+    <ResourceDictionary.MergedDictionaries>
+            <resources:SimplyMenuResources />
+    </ResourceDictionary.MergedDictionaries>
+
+    <styleSelectors:MenuItemStyleSelector x:Key="MenuItemStyleSelector" />
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <tb:TaskbarIcon x:Key="NotifyIcon"
+                    IconSource="{Binding IconSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    ToolTipText="{Binding IconName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+        <tb:TaskbarIcon.ContextMenu>
+            <ContextMenu 
+                Visibility="{Binding IsVisible, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                ItemsSource="{Binding Items, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                IsOpen="{Binding StayOpen, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                ItemContainerStyleSelector="{StaticResource MenuItemStyleSelector}">
+                <ContextMenu.Resources>
+                    <ResourceDictionary>
+                        <DataTemplate  DataType="{x:Type vm:SeparatorMenuItemViewModel}">
+                            <Grid>
+                                <Rectangle Fill="DarkGray" Stroke="DarkGray" Height="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="-20,0,-50,0" />
+                            </Grid>
+                        </DataTemplate>
+                        <DataTemplate  DataType="{x:Type vm:MenuItemViewModel}">
+                            <TextBlock Text="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </ResourceDictionary>
+                </ContextMenu.Resources>
+            </ContextMenu>
+        </tb:TaskbarIcon.ContextMenu>
+    </tb:TaskbarIcon>
+    
+</ResourceDictionary>

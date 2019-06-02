@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>SimplyAnIcon.Core</id>
+    <version>0.1.0</version>
+    <title>SimplyAnIcon.Core</title>
+    <authors>Ericmas001</authors>
+    <licenseUrl>https://raw.githubusercontent.com/SimplyAnIcon/Core/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/SimplyAnIcon/Core</projectUrl>
+    <iconUrl>https://github.com/SimplyAnIcon/Core/raw/master/Resources/cool.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>SimplyAnIcon.Core</description>
+    <summary>SimplyAnIcon.Core</summary>
+    <releaseNotes>Development Version</releaseNotes>
+    <copyright />
+    <language>en</language>
+    <dependencies>
+      <dependency id="Com.Ericmas001.DependencyInjection" version="4.0.0" />
+      <dependency id="Com.Ericmas001.Mvvm" version="0.1.0" />
+      <dependency id="Hardcodet.NotifyIcon.Wpf" version="1.0.8" />
+      <dependency id="Newtonsoft.Json" version="12.0.2" />
+      <dependency id="SimplyAnIcon.Plugins" version="0.9.2" />
+      <dependency id="SimplyAnIcon.Plugins.Wpf" version="0.9.2" />
+      <dependency id="WPFToggleSwitch" version="1.0.0" />
+      <dependency id="Y2D.CustomControls" version="1.5.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="SimplyAnIcon.Core\bin\$configuration$\SimplyAnIcon.Core.dll" target="lib\net461\" />
+    <file src="SimplyAnIcon.Core\bin\$configuration$\SimplyAnIcon.Core.pdb" target="lib\net461\" />
+    <file src="SimplyAnIcon.Core\bin\$configuration$\SimplyAnIcon.Core.xml" target="lib\net461\" />
+  </files>
+</package>
