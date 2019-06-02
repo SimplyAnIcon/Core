@@ -91,6 +91,7 @@ namespace SimplyAnIcon.Core.Services
                 "System.",
                 "Microsoft.",
                 "SimplyAnIcon.Plugins",
+                "SimplyAnIcon.Common",
                 "SimplyAnIcon.Core",
                 "netstandard.dll"
             };
