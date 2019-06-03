@@ -38,8 +38,6 @@
                                 <ResourceDictionary Source="/PresentationFramework.Royale;component/themes/Royale.NormalColor.xaml" />
                             </Style.Resources>
                             <Setter Property="Background" Value="White"/>
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="BorderBrush" Value="Transparent"/>
                         </Style>
                     </ResourceDictionary>
                 </ContextMenu.Resources>
