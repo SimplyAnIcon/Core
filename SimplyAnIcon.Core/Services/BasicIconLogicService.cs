@@ -19,11 +19,30 @@ namespace SimplyAnIcon.Core.Services
     /// </summary>
     public class BasicIconLogicService : IIconLogicService
     {
-        private readonly IInstanceResolverHelper _instanceResolverHelper;
-        private readonly IPluginService _pluginService;
-        private readonly IPluginBasicConfigHelper _pluginBasicConfigHelper;
-        private readonly IIconConfigHelper _iconConfigHelper;
-        private readonly IProcessHelper _processHelper;
+        /// <summary>
+        /// InstanceResolverHelper
+        /// </summary>
+        protected readonly IInstanceResolverHelper InstanceResolverHelper;
+
+        /// <summary>
+        /// PluginService
+        /// </summary>
+        protected readonly IPluginService PluginService;
+
+        /// <summary>
+        /// PluginBasicConfigHelper
+        /// </summary>
+        protected readonly IPluginBasicConfigHelper PluginBasicConfigHelper;
+
+        /// <summary>
+        /// IconConfigHelper
+        /// </summary>
+        protected readonly IIconConfigHelper IconConfigHelper;
+
+        /// <summary>
+        /// ProcessHelper
+        /// </summary>
+        protected readonly IProcessHelper ProcessHelper;
 
         /// <inheritdoc />
         public event EventHandler OnAppExited = delegate { };
@@ -36,18 +55,18 @@ namespace SimplyAnIcon.Core.Services
         /// </summary>
         public BasicIconLogicService(IInstanceResolverHelper instanceResolverHelper, IPluginService pluginService, IPluginBasicConfigHelper pluginBasicConfigHelper, IIconConfigHelper iconConfigHelper, IProcessHelper processHelper)
         {
-            _instanceResolverHelper = instanceResolverHelper;
-            _pluginService = pluginService;
-            _pluginBasicConfigHelper = pluginBasicConfigHelper;
-            _iconConfigHelper = iconConfigHelper;
-            _processHelper = processHelper;
+            InstanceResolverHelper = instanceResolverHelper;
+            PluginService = pluginService;
+            PluginBasicConfigHelper = pluginBasicConfigHelper;
+            IconConfigHelper = iconConfigHelper;
+            ProcessHelper = processHelper;
         }
 
 
         /// <inheritdoc />
         public virtual async Task<IEnumerable<MenuItemViewModel>> UpdateIcon()
         {
-            if (_iconConfigHelper.IsUpdateActivated())
+            if (IconConfigHelper.IsUpdateActivated())
             {
                 await OnUpdate();
                 return FinalizeUpdateIcon();
@@ -89,26 +108,34 @@ namespace SimplyAnIcon.Core.Services
         /// <inheritdoc />
         public virtual void Restart()
         {
-            _processHelper.ExecuteApp(_iconConfigHelper.GetAppPath());
+            ProcessHelper.ExecuteApp(IconConfigHelper.GetAppPath());
+            ExitApp();
+        }
+
+        /// <summary>
+        /// ExitApp
+        /// </summary>
+        protected virtual void ExitApp()
+        {
             OnAppExited(this, new EventArgs());
         }
 
         /// <inheritdoc />
-        public virtual void OnDispose() => _pluginService.DisposePlugins(PluginsCatalog);
+        public virtual void OnDispose() => PluginService.DisposePlugins(PluginsCatalog);
 
         /// <summary>
         /// LoadPlugins
         /// </summary>
         protected virtual void LoadPlugins()
         {
-            PluginsCatalog = _pluginService.LoadPlugins(PluginsCatalog, GetPluginPaths(), _instanceResolverHelper, CreateRegistrantFinderBuilder(), _pluginBasicConfigHelper.GetForcedPlugins());
+            PluginsCatalog = PluginService.LoadPlugins(PluginsCatalog, GetPluginPaths(), InstanceResolverHelper, CreateRegistrantFinderBuilder(), PluginBasicConfigHelper.GetForcedPlugins());
 
             var catalog = PluginsCatalog.ToArray();
 
             foreach (var resourceDictionary in catalog.Where(x => x.IsNew && x.IsForeground).SelectMany(x => x.ForegroundPlugin.ResourceDictionaries))
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
 
-            _pluginService.ActivateNewPlugins(catalog);
+            PluginService.ActivateNewPlugins(catalog);
         }
 
         /// <summary>
@@ -121,7 +148,7 @@ namespace SimplyAnIcon.Core.Services
         /// </summary>
         protected virtual IEnumerable<string> GetPluginPaths()
         {
-            var pluginPath = Path.Combine(Path.GetDirectoryName(_iconConfigHelper.GetAppPath()) ?? throw new NoNullAllowedException(), "Plugins");
+            var pluginPath = Path.Combine(Path.GetDirectoryName(IconConfigHelper.GetAppPath()) ?? throw new NoNullAllowedException(), "Plugins");
             if (!Directory.Exists(pluginPath))
                 Directory.CreateDirectory(pluginPath);
             return new[] { pluginPath };
