@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SimplyAnIcon.Core</id>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
     <title>SimplyAnIcon.Core</title>
     <authors>Ericmas001</authors>
     <licenseUrl>https://raw.githubusercontent.com/SimplyAnIcon/Core/master/LICENSE</licenseUrl>
@@ -15,11 +15,11 @@
     <copyright />
     <language>en</language>
     <dependencies>
-      <dependency id="Com.Ericmas001.DependencyInjection" version="4.0.0" />
+      <dependency id="Com.Ericmas001.DependencyInjection" version="5.0.0" />
       <dependency id="Com.Ericmas001.Mvvm" version="0.1.1" />
       <dependency id="Hardcodet.NotifyIcon.Wpf" version="1.0.8" />
       <dependency id="Newtonsoft.Json" version="12.0.2" />
-      <dependency id="SimplyAnIcon.Common" version="1.0.0" />
+      <dependency id="SimplyAnIcon.Common" version="1.1.0" />
       <dependency id="SimplyAnIcon.Plugins" version="1.0.3" />
       <dependency id="SimplyAnIcon.Plugins.Wpf" version="1.0.3" />
       <dependency id="WPFToggleSwitch" version="1.0.0" />

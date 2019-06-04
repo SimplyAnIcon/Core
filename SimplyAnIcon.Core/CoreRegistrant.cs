@@ -5,6 +5,8 @@ using SimplyAnIcon.Core.Services;
 using SimplyAnIcon.Core.Services.Interfaces;
 using SimplyAnIcon.Core.Settings;
 using SimplyAnIcon.Core.Settings.Interface;
+using SimplyAnIcon.Core.ViewModels;
+using SimplyAnIcon.Core.ViewModels.Interfaces;
 
 namespace SimplyAnIcon.Core
 {
@@ -17,20 +19,28 @@ namespace SimplyAnIcon.Core
             RegisterServices();
             RegisterHelpers();
             RegisterSettings();
+            RegisterViewModels();
         }
 
         private void RegisterHelpers()
         {
             Register<IPluginBasicConfigHelper, EmptyPluginBasicConfigHelper>();
+            Register<IIconConfigHelper, DefaultIconConfigHelper>();
         }
 
         private void RegisterServices()
         {
+            Register<IIconLogicService, BasicIconLogicService>();
             Register<IPluginService, PluginService>();
         }
         private void RegisterSettings()
         {
             Register<IPluginSettings, PluginSettings>();
+        }
+        private void RegisterViewModels()
+        {
+            Register<IConfigViewModel, BasicConfigViewModel>();
+            Register<IViewModelFactory>(rsvl => new ViewModelFactory(rsvl.Resolve<IConfigViewModel>));
         }
     }
 }

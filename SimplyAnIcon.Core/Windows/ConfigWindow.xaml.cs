@@ -1,4 +1,4 @@
-﻿using SimplyAnIcon.Core.ViewModels;
+﻿using SimplyAnIcon.Core.ViewModels.Interfaces;
 
 namespace SimplyAnIcon.Core.Windows
 {
@@ -10,10 +10,10 @@ namespace SimplyAnIcon.Core.Windows
         /// <summary>
         /// ConfigWindow
         /// </summary>
-        public ConfigWindow( AbstractConfigViewModel abstractConfigViewModel )
+        public ConfigWindow(IConfigViewModel configViewModel)
         {
             InitializeComponent();
-            DataContext = abstractConfigViewModel;
+            DataContext = configViewModel;
         }
     }
 }

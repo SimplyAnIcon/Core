@@ -10,32 +10,31 @@ using SimplyAnIcon.Core.ViewModels.Interfaces;
 namespace SimplyAnIcon.Core.ViewModels
 {
     /// <summary>
-    /// AbstractConfigViewModel
+    /// BasicConfigViewModel
     /// </summary>
-    public abstract class AbstractConfigViewModel : ViewModelBase
+    public class BasicConfigViewModel : ViewModelBase, IConfigViewModel
     {
-        private readonly IResolverService _resolverService;
+        /// <summary>
+        /// ResolverService
+        /// </summary>
+        protected readonly IResolverService ResolverService;
+
         private readonly FastObservableCollection<IConfigurationSectionViewModel> _sections = new FastObservableCollection<IConfigurationSectionViewModel>();
         private string _iconSource;
 
         private IConfigurationSectionViewModel _selectedSection;
-        /// <summary>
-        /// Sections
-        /// </summary>
+
+        /// <inheritdoc />
         public IEnumerable<IConfigurationSectionViewModel> Sections => _sections;
 
-        /// <summary>
-        /// SelectedSection
-        /// </summary>
+        /// <inheritdoc />
         public IConfigurationSectionViewModel SelectedSection
         {
             get => _selectedSection;
             set => Set(ref _selectedSection, value);
         }
 
-        /// <summary>
-        /// IconSource
-        /// </summary>
+        /// <inheritdoc />
         public string IconSource
         {
             get => _iconSource;
@@ -43,16 +42,14 @@ namespace SimplyAnIcon.Core.ViewModels
         }
 
         /// <summary>
-        /// AbstractConfigViewModel
+        /// BasicConfigViewModel
         /// </summary>
-        protected AbstractConfigViewModel(IResolverService resolverService)
+        public BasicConfigViewModel(IResolverService resolverService)
         {
-            _resolverService = resolverService;
+            ResolverService = resolverService;
         }
 
-        /// <summary>
-        /// OnInit
-        /// </summary>
+        /// <inheritdoc />
         public void OnInit(IEnumerable<PluginInfo> catalog)
         {
             _sections.AddItems(GenerateSections(catalog).ToList());
@@ -65,7 +62,7 @@ namespace SimplyAnIcon.Core.ViewModels
         /// </summary>
         protected virtual IEnumerable<IConfigurationSectionViewModel> GenerateSections(IEnumerable<PluginInfo> catalog)
         {
-            var plugins = _resolverService.Resolve<PluginsConfigurationSectionViewModel>();
+            var plugins = ResolverService.Resolve<PluginsConfigurationSectionViewModel>();
             plugins.OnInit(catalog);
             return new[] { plugins };
         }
